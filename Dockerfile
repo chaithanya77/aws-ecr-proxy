@@ -1,4 +1,4 @@
-FROM nginx:1.12.0-alpine
+FROM nginx:alpine
 
 RUN apk -v --update add \
         python \
@@ -14,8 +14,9 @@ ADD configs/nginx/ssl /etc/nginx/ssl
 ADD configs/entrypoint.sh /entrypoint.sh
 ADD configs/auth_update.sh /auth_update.sh
 ADD configs/renew_token.sh /renew_token.sh
+RUN mkdir /cache
 
-EXPOSE 80 443
+EXPOSE 443
 
 ENTRYPOINT ["/entrypoint.sh"]
 
